@@ -242,7 +242,8 @@ namespace Id3Lib
             if (frame[index] == 0xff && frame[index + 1] == 0xfe) // Little Endian
                 return ReadUTF16LEEnd(frame, index + 2);
 
-            throw new InvalidFrameException("Invalid UTF16 string.");
+			// fall back to ASCII
+			return ReadASCIIEnd(frame, index);
         }
 
         [Pure, NotNull]
